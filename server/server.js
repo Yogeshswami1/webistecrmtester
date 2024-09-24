@@ -90,7 +90,7 @@ app.use(cors({
 
   // origin: 'http://localhost:3000',  // Temporarily allow all origins for debugging
 
-  origin: 'http://websitecrmtester.saumic.com',  // Temporarily allow all origins for debugging
+  origin: 'https://websitecrmtester.saumic.com',  // Temporarily allow all origins for debugging
 
 
   methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],

@@ -86,3 +86,48 @@ server {
     error_log /var/log/nginx/webcrm.saumic.com.log;
     access_log /var/log/nginx/webcrm.saumic.com.log;
 }
+
+
+
+sudo nano /etc/nginx/sites-available/websitecrmtesterback.saumic.com
+
+server {
+    listen 80;
+    server_name websitecrmtesterback.saumic.com;
+
+    location / {
+        proxy_pass http://localhost:8800;  # Assuming your Node.js app is running on port 3000
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    error_log /var/log/nginx/test-node.websitecrmtesterback.saumic.com.log;
+    access_log /var/log/nginx/test-node.websitecrmtesterback.saumic.com.log;
+}
+
+sudo ln -s /etc/nginx/sites-available/websitecrmtesterback.saumic.com /etc/nginx/sites-enabled/
+
+
+
+
+sudo nano /etc/nginx/sites-available/websitecrmtester.saumic.com.tech
+
+
+
+server {
+    listen 80;
+    server_name websitecrmtester.saumic.com; #  Replace it with your own domain 
+
+    root /var/www/html/webistecrmtester/client/build; # Replace with the path to your build directory
+    index index.html;
+
+    location / {
+        try_files $uri /index.html;
+    }
+
+    error_log /var/log/nginx/websitecrmtester.saumic.com.log;
+    access_log /var/log/nginx/websitecrmtester.saumic.com.log;
+}
